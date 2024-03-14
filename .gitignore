@@ -1,0 +1,3 @@
+venv_etl_pipeline/
+.env
+*.json

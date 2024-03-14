@@ -2,19 +2,11 @@ from google.cloud import bigquery
 from dotenv import load_dotenv
 import os
 
-# Cargar variables de entorno desde el archivo .env
-load_dotenv()
+from extract.extract_gsheet import extract_data_from_google_sheets
+from transform.transform_gsheet import clean_data_from_google_sheets
+from load.load_curated_gsheet import load_data_from_google_sheets
 
-# Obtener la ruta al archivo de credenciales desde las variables de entorno
-credentials_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+dataframes = extract_data_from_google_sheets()
+categorias_df, pedidos_df, empleados_df, clientes_df, pedidos_detalles_df, productos_df, transportistas_df = clean_data_from_google_sheets(dataframes)
+load_data_from_google_sheets(categorias_df, pedidos_df, empleados_df, clientes_df, pedidos_detalles_df, productos_df, transportistas_df)
 
-try:
-    # Inicializar el cliente de BigQuery con las credenciales personalizadas
-    client = bigquery.Client.from_service_account_json(credentials_path)
-    print("Conexión exitosa a BigQuery.")
-    
-    # Resto del código para cargar datos a BigQuery...
-except Exception as e:
-    print("Error al conectarse a BigQuery:", e)
-
-print("Ruta del archivo de credenciales:", credentials_path)
