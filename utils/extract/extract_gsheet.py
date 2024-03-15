@@ -36,7 +36,7 @@ def extract_data_from_google_sheets():
     try:
         creds = service_account.Credentials.from_service_account_file(KEY, scopes=SCOPES)
         dataframes = get_google_sheets_data(SPREADSHEET_ID, SHEET_NAMES, creds)
-        print("Proceso de extracción de datos de GSheets exitosa")
+        print("Proceso de extracción de datos de GSheets exitoso")
         return dataframes
     except Exception as e:
         print(f"Error al extraer datos de las hojas de cálculo de Google: {str(e)}")

@@ -129,6 +129,7 @@ def clean_data_from_google_sheets(dataframes):
     """
     Limpia los datos de las hojas de cálculo de Google.
     """
+    #Accede a cada dataframe desde el diccionario dataframes
     categorias_df = dataframes['categorias']
     pedidos_df = dataframes['pedidos']
     empleados_df = dataframes['empleados']
@@ -137,6 +138,7 @@ def clean_data_from_google_sheets(dataframes):
     productos_df = dataframes['productos']
     transportistas_df = dataframes['transportistas']
 
+    #Limpia cada dataframe
     categorias_df = format_categorias(categorias_df)
     pedidos_df = format_pedidos(pedidos_df)
     empleados_df = format_empleados(empleados_df)
@@ -144,6 +146,7 @@ def clean_data_from_google_sheets(dataframes):
     pedidos_detalles_df = format_pedidos_detalles(pedidos_detalles_df)
     productos_df = format_productos(productos_df)
     transportistas_df = format_transportistas(transportistas_df)
-    print("Proceso de limpieza de datos de GSheets exitosa")
-
+    print("Proceso de limpieza de datos del GSheets exitoso")
     return categorias_df, pedidos_df, empleados_df, clientes_df, pedidos_detalles_df, productos_df, transportistas_df
+
+    
