@@ -4,6 +4,7 @@ from utils.transform.transform_gsheet import clean_data_from_google_sheets
 from utils.transform.transform_bigquery import execute_sql_query_from_file
 from utils.load.load_mart_querys import load_data_marts
 from utils.load.load_curated_gsheet import load_data_from_google_sheets
+import time
 
 @op(description="Correrá la extracción del G-Sheets")
 def load_info_data(context):
@@ -64,9 +65,9 @@ def transform_data_marts(context, categorias_df, pedidos_df, empleados_df, clien
         for i, name in enumerate(["df_pedidos_ultimos_6_meses", "df_total_ventas_por_categoria", "df_clientes_tofu",\
                                    "df_top1_transportistas_beverages","df_top2_transportistas_beverages"]):
             yield Output(dfs[i], name)
-        context.log.info("Transformación de la data curada exitosa")
+        context.log.info("Transformación de la data curada en tablas marts exitosa")
     except Exception as e:
-        context.log.info(f"Transformación de la data curada fallida, error {e}")
+        context.log.info(f"Transformación de la data curada fallida en tablas marts, error {e}")
 
 
 @op(description="Cargar las tablas marts a BQ en el esquema mart_ops_envios")
