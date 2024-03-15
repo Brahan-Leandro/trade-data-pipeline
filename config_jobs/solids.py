@@ -70,7 +70,7 @@ def transform_data_marts(context, categorias_df, pedidos_df, empleados_df, clien
 
 
 @op(description="Cargar las tablas marts a BQ en el esquema mart_ops_envios")
-def load_data_marts(context, df_pedidos_ultimos_6_meses, df_total_ventas_por_categoria, df_clientes_tofu, df_top1_transportistas_beverages, df_top2_transportistas_beverages) -> Nothing:
+def load_tables_marts(context, df_pedidos_ultimos_6_meses, df_total_ventas_por_categoria, df_clientes_tofu, df_top1_transportistas_beverages, df_top2_transportistas_beverages) -> Nothing:
     try:
         context.log.info("Comenzando la cargas de las tablas marts a BQ en el esquema mart_ops_envios")
         load_data_marts(df_pedidos_ultimos_6_meses, df_total_ventas_por_categoria, df_clientes_tofu, df_top1_transportistas_beverages, df_top2_transportistas_beverages)
@@ -103,7 +103,7 @@ def pipeline():
         productos_df=results.productos_df,
         transportistas_df=results.transportistas_df
     )
-    load_data_marts(
+    load_tables_marts(
         df_pedidos_ultimos_6_meses=marts.df_pedidos_ultimos_6_meses,
         df_total_ventas_por_categoria=marts.df_total_ventas_por_categoria,
         df_clientes_tofu=marts.df_clientes_tofu,
